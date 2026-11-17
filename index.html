@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>강릉시 자원순환센터 손수건 기념품 디자인 결과 보고</title>
+<meta name="description" content="강릉시 자원순환센터 손수건 기념품(45×45cm, 300매) 디자인 의미와 색상 개발 과정 보고">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#17242c; --ink:#0d171c; --deep:#101c22; --panel:#16252d; --line:rgba(229,234,227,.12);
+  --cream:#efeee6; --mute:#9fb0aa; --orange:#fd6b18; --yellow:#f9c25a; --white:#dfe8d2;
+  --green:#51992d; --sky:#2b4d72; --bird:#04abf9; --accent:var(--orange);
+  --serif:'Gowun Batang',serif; --sans:'IBM Plex Sans KR',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+::selection{background:var(--orange);color:var(--ink)}
+
+/* ---------- 상단바 / 진행 ---------- */
+.topbar{position:fixed;inset:0 0 auto 0;height:58px;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:linear-gradient(var(--ink),rgba(13,23,28,.0));transition:background .4s}
+.topbar.solid{background:rgba(13,23,28,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:10px;align-items:center;font-size:13px;letter-spacing:.04em;color:var(--mute)}
+.brand b{color:var(--cream);font-weight:600}
+.dot-o{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.top-actions{display:flex;gap:8px}
+.pill{font-size:12.5px;padding:7px 14px;border:1px solid var(--line);border-radius:99px;color:var(--cream);transition:.25s}
+.pill:hover{border-color:var(--accent);color:var(--accent)}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:60;width:0;box-shadow:0 0 10px var(--accent)}
+
+.sidenav{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:12px}
+.sidenav a{display:flex;align-items:center;justify-content:flex-end;gap:10px;text-decoration:none;color:var(--mute);font-size:12px}
+.sidenav a span{opacity:0;transform:translateX(6px);transition:.3s;white-space:nowrap}
+.sidenav a i{width:8px;height:8px;border-radius:50%;border:1px solid var(--mute);transition:.3s}
+.sidenav a:hover span{opacity:1;transform:none}
+.sidenav a.on i{background:var(--accent);border-color:var(--accent);transform:scale(1.4)}
+.sidenav a.on{color:var(--cream)}
+
+/* ---------- 공통 섹션 ---------- */
+section{position:relative;padding:130px 7vw;min-height:100vh}
+.wrap{max-width:1240px;margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:13px;letter-spacing:.18em;color:var(--accent);font-weight:600;margin-bottom:22px}
+.eyebrow::after{content:"";height:1px;width:60px;background:var(--accent)}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(32px,4.4vw,58px);line-height:1.25;letter-spacing:-.01em;margin-bottom:28px}
+h2 em{font-style:normal;color:var(--accent)}
+.lead{font-size:clamp(16px,1.35vw,19px);color:#cfd8d2;max-width:760px}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+
+/* 개조식 */
+.gae{list-style:none;margin-top:18px}
+.gae li{position:relative;padding-left:26px;margin:9px 0;color:#d6ded9}
+.gae li::before{content:"□";position:absolute;left:0;color:var(--accent);font-size:.95em}
+.gae li.o{padding-left:48px}.gae li.o::before{content:"○";left:22px}
+.gae li.d{padding-left:70px;color:var(--mute);font-size:.95em}.gae li.d::before{content:"–";left:48px;color:var(--mute)}
+
+/* ---------- 01 HERO ---------- */
+#hero{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:5vw;padding-top:110px;overflow:hidden}
+#hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 75% 50%,rgba(253,107,24,.16),transparent 60%),radial-gradient(40% 50% at 10% 90%,rgba(81,153,45,.12),transparent 70%)}
+.hero-copy{position:relative;z-index:2}
+.tag{display:inline-flex;gap:8px;align-items:center;font-size:12.5px;padding:6px 14px;border:1px solid rgba(253,107,24,.45);border-radius:99px;color:var(--accent);margin-bottom:30px}
+.hero-title{font-family:var(--serif);font-weight:700;font-size:clamp(40px,6vw,86px);line-height:1.12;letter-spacing:-.02em}
+.hero-title .ln{display:block;overflow:hidden}
+.hero-title .ln>span{display:inline-block;transform:translateY(110%);animation:up 1.1s var(--ease) forwards}
+.hero-title .ln:nth-child(2)>span{animation-delay:.15s}
+.hero-title .ln:nth-child(3)>span{animation-delay:.3s;color:var(--accent)}
+@keyframes up{to{transform:none}}
+.hero-sub{margin-top:28px;font-size:18px;color:#c9d3cd;opacity:0;animation:fade 1s .7s forwards}
+@keyframes fade{to{opacity:1}}
+.meta{display:grid;grid-template-columns:repeat(4,auto);gap:10px 34px;margin-top:46px;opacity:0;animation:fade 1s 1s forwards;justify-content:start}
+.meta div{font-size:12px;color:var(--mute);letter-spacing:.06em}
+.meta b{display:block;font-size:17px;color:var(--cream);font-weight:600;letter-spacing:0;margin-top:2px}
+.hero-art{position:relative;z-index:2;perspective:1200px;display:grid;place-items:center}
+.orbit{position:absolute;width:118%;aspect-ratio:1;border-radius:50%;border:1px dashed rgba(253,107,24,.35);animation:spin 60s linear infinite}
+.orbit.two{width:96%;border-style:solid;border-color:rgba(229,234,227,.07);animation-duration:90s;animation-direction:reverse}
+.orbit::before{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px var(--accent)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hk-tilt{width:min(560px,40vw);aspect-ratio:1;transform-style:preserve-3d;transition:transform .25s ease-out;opacity:0;animation:drop 1.6s .2s var(--ease) forwards}
+@keyframes drop{from{opacity:0;transform:rotateX(35deg) rotateZ(-12deg) translateY(60px) scale(.85)}to{opacity:1}}
+.hk-tilt img{width:100%;height:100%;object-fit:cover;border-radius:6px;box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.hk-tilt::after{content:"";position:absolute;inset:0;border-radius:6px;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.14) 50%,transparent 60%);background-size:250% 100%;animation:sheen 5s 2s infinite}
+@keyframes sheen{0%{background-position:150% 0}60%,100%{background-position:-60% 0}}
+.scroll-cue{position:absolute;left:7vw;bottom:34px;font-size:12px;color:var(--mute);letter-spacing:.2em;display:flex;align-items:center;gap:12px;z-index:2}
+.scroll-cue i{width:1px;height:46px;background:linear-gradient(var(--accent),transparent);animation:cue 2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- 02 요약 ---------- */
+#summary{background:var(--deep)}
+.sum-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:50px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px 30px;position:relative;overflow:hidden}
+.card h4{font-size:12.5px;letter-spacing:.14em;color:var(--mute);font-weight:500;margin-bottom:10px}
+.card p{font-size:17px}
+.c-wide{grid-column:span 8}.c-mid{grid-column:span 4}.c-third{grid-column:span 4}
+.verdict{background:linear-gradient(135deg,rgba(253,107,24,.22),rgba(253,107,24,.04));border-color:rgba(253,107,24,.45)}
+.verdict .big{font-family:var(--serif);font-size:clamp(28px,3vw,42px);line-height:1.2;margin:6px 0 8px}
+.verdict .chip{display:inline-block;width:18px;height:18px;border-radius:50%;background:var(--orange);vertical-align:-2px;margin-right:8px;box-shadow:0 0 14px var(--orange)}
+.num{font-family:var(--serif);font-size:48px;line-height:1;color:var(--cream)}
+.num small{font-size:18px;color:var(--mute);margin-left:4px;font-family:var(--sans)}
+
+/* ---------- 03 배경 ---------- */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start}
+.flow{display:flex;flex-direction:column;gap:14px;margin-top:10px}
+.flow-step{display:grid;grid-template-columns:56px 1fr;gap:18px;align-items:center;padding:20px 22px;border:1px solid var(--line);border-radius:16px;background:var(--panel);transition:.4s}
+.flow-step:hover{border-color:var(--accent);transform:translateX(6px)}
+.flow-step .ic{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:rgba(253,107,24,.12);color:var(--accent);font-family:var(--serif);font-size:22px}
+.flow-step b{display:block;font-size:17px}
+.flow-step span{font-size:14px;color:var(--mute)}
+.keyword-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.kw{padding:9px 16px;border-radius:99px;border:1px solid var(--line);font-size:14px;color:#d6ded9}
+.kw b{color:var(--accent);font-weight:600;margin-right:6px}
+
+/* ---------- 04 콘셉트 ---------- */
+#concept{display:grid;place-items:center;text-align:center;background:radial-gradient(50% 60% at 50% 50%,rgba(253,107,24,.12),transparent 70%),var(--deep);overflow:hidden}
+.concept-ring{position:absolute;width:min(90vw,900px);aspect-ratio:1;opacity:.5}
+.concept-ring circle{fill:none;stroke:var(--accent);stroke-width:1.2;stroke-dasharray:14 22;animation:dash 40s linear infinite;transform-origin:center}
+@keyframes dash{to{stroke-dashoffset:-1000}}
+.concept-quote{font-family:var(--serif);font-size:clamp(36px,5.6vw,80px);line-height:1.25;position:relative}
+.concept-quote span{color:var(--accent)}
+.concept-chain{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:50px;flex-wrap:wrap;position:relative}
+.concept-chain div{padding:14px 24px;border:1px solid var(--line);border-radius:99px;background:rgba(22,37,45,.8);font-size:16px}
+.concept-chain i{color:var(--accent);font-style:normal;font-size:20px}
+
+/* ---------- 05 상징 해설 ---------- */
+.sym-grid{display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;margin-top:30px}
+.sym-stage{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.sym-stage img{width:100%;height:100%;object-fit:cover}
+.sym-stage svg{position:absolute;inset:0;width:100%;height:100%}
+.sym-stage .shade{fill:rgba(8,14,18,.78);transition:opacity .6s}
+.sym-stage .glow{fill:none;stroke:var(--accent);stroke-width:4;stroke-dasharray:10 10;animation:dash 30s linear infinite;opacity:0;transition:opacity .5s}
+.sym-tabs{display:flex;flex-direction:column;gap:12px}
+.sym-tab{text-align:left;padding:22px 26px;border:1px solid var(--line);border-radius:16px;background:var(--panel);transition:.35s;position:relative;overflow:hidden}
+.sym-tab .n{font-family:var(--serif);color:var(--accent);font-size:15px;margin-right:10px}
+.sym-tab b{font-size:19px;font-weight:600}
+.sym-tab p{max-height:0;opacity:0;overflow:hidden;transition:.5s var(--ease);color:#cdd6d0;font-size:15.5px}
+.sym-tab.on{border-color:var(--accent);background:linear-gradient(120deg,rgba(253,107,24,.14),var(--panel) 60%)}
+.sym-tab.on p{max-height:220px;opacity:1;margin-top:10px}
+.sym-tab::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--accent)}
+.sym-tab.on::after{animation:bar 6s linear forwards}
+@keyframes bar{to{width:100%}}
+.sym-hint{font-size:13px;color:var(--mute);margin-top:6px}
+
+/* ---------- 06 색상 개발 (스티키) ---------- */
+#evolution{background:var(--deep);padding-bottom:60px}
+.evo{display:grid;grid-template-columns:1fr 1fr;gap:6vw;margin-top:40px}
+.evo-sticky{position:sticky;top:110px;height:fit-content}
+.evo-canvas-wrap{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.evo-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;transition:opacity 1s var(--ease)}
+.evo-label{position:absolute;left:16px;top:16px;padding:7px 14px;border-radius:99px;background:rgba(13,23,28,.82);font-size:13px;backdrop-filter:blur(6px);display:flex;gap:8px;align-items:center}
+.evo-label i{width:12px;height:12px;border-radius:50%}
+.evo-bar{display:flex;gap:6px;margin-top:16px}
+.evo-bar span{flex:1;height:4px;border-radius:2px;background:var(--line);transition:.5s}
+.evo-steps .step{min-height:78vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .6s}
+.evo-steps .step.on{opacity:1}
+.step .sw{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.step .sw i{width:54px;height:54px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.step .sw small{display:block;color:var(--mute);font-size:13px}
+.step h3{font-family:var(--serif);font-size:clamp(26px,2.6vw,36px);margin-bottom:10px}
+.step .why{margin-top:14px;padding:16px 18px;border-left:3px solid var(--sc,var(--accent));background:rgba(255,255,255,.03);border-radius:0 12px 12px 0;font-size:15px;color:#cfd8d2}
+
+/* 평가표 */
+.eval{margin-top:70px}
+table.ev{width:100%;border-collapse:collapse;margin-top:20px;font-size:15px}
+.ev th,.ev td{padding:16px 14px;border-bottom:1px solid var(--line);text-align:center}
+.ev th{font-weight:500;color:var(--mute);font-size:13px;letter-spacing:.06em}
+.ev td:first-child,.ev th:first-child{text-align:left}
+.ev tr.pick td{background:rgba(253,107,24,.08)}
+.ev tr.pick td:last-child{color:var(--accent);font-weight:700}
+.ev .c{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:8px}
+.meter{display:inline-block;width:90px;height:6px;border-radius:3px;background:var(--line);overflow:hidden;vertical-align:middle;margin-right:8px}
+.meter b{display:block;height:100%;width:0;background:var(--mute);transition:width 1.4s var(--ease)}
+.note{font-size:12.5px;color:var(--mute);margin-top:12px}
+
+/* ---------- 07 컬러 스튜디오 ---------- */
+#studio{background:linear-gradient(180deg,var(--ink),#0a1317)}
+.studio{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;margin-top:36px;align-items:start}
+.canvas-box{position:relative;border-radius:10px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.6);background:#000;touch-action:none}
+#studioCanvas{width:100%;display:block;cursor:crosshair}
+.canvas-box.mode-src #studioCanvas{cursor:crosshair}
+.mode-banner{position:absolute;left:14px;top:14px;padding:8px 14px;border-radius:99px;font-size:13px;background:rgba(13,23,28,.85);backdrop-filter:blur(6px);display:flex;align-items:center;gap:8px;pointer-events:none}
+.mode-banner i{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.2s infinite}
+@keyframes blink{50%{opacity:.2}}
+.loupe{position:absolute;width:130px;height:150px;pointer-events:none;display:none;flex-direction:column;align-items:center;z-index:5}
+.loupe canvas{width:120px;height:120px;border-radius:50%;border:3px solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.6);image-rendering:pixelated}
+.loupe span{margin-top:4px;font-size:12px;padding:2px 8px;background:rgba(0,0,0,.75);border-radius:6px;font-family:ui-monospace,monospace}
+.compare-badge{position:absolute;right:14px;top:14px;padding:6px 12px;border-radius:8px;background:#fff;color:#111;font-size:12px;font-weight:700;display:none}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+.slots{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.slot{border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.3s;text-align:left}
+.slot.active{border-color:var(--accent);box-shadow:0 0 0 3px rgba(253,107,24,.18)}
+.slot small{font-size:12px;color:var(--mute);display:block;margin-bottom:8px}
+.slot .sw{display:flex;align-items:center;gap:10px}
+.slot .sw i{width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:repeating-conic-gradient(#2a3a42 0 25%,#1d2b32 0 50%) 0 0/12px 12px}
+.slot .sw code{font-size:14px;font-family:ui-monospace,monospace}
+.arrow{color:var(--accent);font-size:22px}
+.studio h5{font-size:13px;color:var(--mute);font-weight:500;letter-spacing:.08em;margin:22px 0 10px;display:flex;justify-content:space-between;align-items:center}
+.chart{display:grid;grid-template-columns:repeat(12,1fr);gap:4px}
+.chart button{aspect-ratio:1;border-radius:5px;transition:transform .15s;border:1px solid rgba(0,0,0,.25)}
+.chart button:hover{transform:scale(1.35);z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.6)}
+.presets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.presets button{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;font-size:13px;text-align:left;transition:.2s}
+.presets button:hover{border-color:var(--accent)}
+.presets i{width:18px;height:18px;border-radius:50%;flex:none;border:1px solid rgba(255,255,255,.2)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row label{font-size:13px;color:var(--mute)}
+input[type=range]{accent-color:var(--orange);flex:1}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.btn{padding:10px 16px;border-radius:10px;border:1px solid var(--line);font-size:14px;transition:.2s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#111;font-weight:600}
+.btn.primary:hover{filter:brightness(1.1);color:#111}
+.native{position:relative;overflow:hidden}
+.native input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.history{display:flex;gap:6px;flex-wrap:wrap;min-height:28px}
+.history span{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.05)}
+.history i{width:12px;height:12px;border-radius:3px}
+.guide-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.guide-steps div{padding:16px;border-radius:14px;border:1px dashed var(--line);font-size:14px;color:#cdd6d0}
+.guide-steps b{display:block;color:var(--accent);font-family:var(--serif);font-size:20px;margin-bottom:4px}
+.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,40px);opacity:0;padding:12px 20px;border-radius:12px;background:#fff;color:#111;font-size:14px;font-weight:500;z-index:90;transition:.4s var(--ease);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- 08 사양·공정 ---------- */
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.spec{padding:30px 26px;border-radius:18px;border:1px solid var(--line);background:var(--panel)}
+.spec h4{font-size:13px;color:var(--mute);font-weight:500;margin-bottom:14px}
+.spec .num{font-size:52px}
+.spec p{font-size:14px;color:var(--mute);margin-top:8px}
+.timeline{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:70px}
+.timeline::before{content:"";position:absolute;top:22px;left:4%;right:4%;height:2px;background:var(--line)}
+.timeline .fill{position:absolute;top:22px;left:4%;height:2px;width:0;background:var(--accent);transition:width 2.4s var(--ease);box-shadow:0 0 10px var(--accent)}
+.timeline.in .fill{width:92%}
+.tl{position:relative;text-align:center;padding-top:62px}
+.tl::before{content:attr(data-n);position:absolute;top:0;left:50%;transform:translateX(-50%);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--ink);border:2px solid var(--line);font-family:var(--serif);font-size:16px;transition:.5s}
+.timeline.in .tl::before{border-color:var(--accent);color:var(--accent)}
+.tl b{display:block;font-size:16px}
+.tl span{font-size:13px;color:var(--mute)}
+
+/* ---------- 09 포장 ---------- */
+#package{background:var(--deep);overflow:hidden}
+.pkg-scene{height:460px;perspective:1400px;display:grid;place-items:center}
+.box{position:relative;width:260px;height:260px;transform-style:preserve-3d;animation:turn 16s linear infinite}
+.box:hover{animation-play-state:paused}
+@keyframes turn{from{transform:rotateX(-24deg) rotateY(0)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+.face{position:absolute;background:#efe8d8;border:1px solid rgba(0,0,0,.12)}
+.f-top,.f-bot{width:260px;height:260px}
+.f-side{width:260px;height:70px;top:95px}
+.f-top{transform:rotateX(90deg) translateZ(35px);background:#efe8d8;display:grid;place-items:center}
+.f-bot{transform:rotateX(-90deg) translateZ(35px);background:#d9d0bd}
+.f-front{transform:translateZ(130px)}.f-back{transform:rotateY(180deg) translateZ(130px)}
+.f-left{transform:rotateY(-90deg) translateZ(130px)}.f-right{transform:rotateY(90deg) translateZ(130px)}
+.f-side{background:linear-gradient(#efe8d8,#e1d8c4);display:flex;align-items:center;justify-content:center;color:#3a3a32;font-size:11px;letter-spacing:.2em}
+.f-side::after{content:"";position:absolute;left:0;right:0;bottom:12px;height:6px;background:var(--orange)}
+.window{width:150px;height:150px;border-radius:50%;overflow:hidden;box-shadow:inset 0 0 0 6px #e2d9c6,0 0 0 1px rgba(0,0,0,.15)}
+.window img{width:100%;height:100%;object-fit:cover;transform:scale(1.5)}
+.sticker{position:absolute;right:16px;bottom:16px;width:80px;height:80px;border-radius:50%;background:var(--orange);color:#fff;display:grid;place-items:center;text-align:center;font-size:9px;line-height:1.3;font-weight:700;transform:rotate(-12deg);box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.pkg-points{display:grid;gap:14px}
+
+/* ---------- 10 활용 ---------- */
+.use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.use{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/4.4;background:#000}
+.use img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease);opacity:.92}
+.use:hover img{transform:scale(1.08)}
+.use figcaption{position:absolute;inset:auto 0 0 0;padding:60px 22px 20px;background:linear-gradient(transparent,rgba(5,10,12,.9))}
+.use figcaption b{display:block;font-family:var(--serif);font-size:22px}
+.use figcaption span{font-size:14px;color:#cdd6d0}
+
+/* ---------- 11 기대효과 ---------- */
+.effect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.effect{padding:30px 24px;border-radius:18px;border:1px solid var(--line);background:var(--panel);transition:.4s}
+.effect:hover{transform:translateY(-6px);border-color:var(--accent)}
+.effect .ic{font-family:var(--serif);font-size:34px;color:var(--accent);margin-bottom:14px}
+.effect b{display:block;font-size:18px;margin-bottom:8px}
+.effect p{font-size:14.5px;color:#c4cec8}
+.policy{margin-top:40px;padding:26px 30px;border-radius:18px;border:1px solid rgba(253,107,24,.4);background:rgba(253,107,24,.06);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.policy .tagx{font-family:var(--serif);font-size:22px;color:var(--accent)}
+
+footer{padding:90px 7vw 60px;text-align:center;border-top:1px solid var(--line);background:var(--ink)}
+footer .end{font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);margin-bottom:18px}
+footer p{color:var(--mute);font-size:14px}
+
+/* ---------- 반응형 ---------- */
+@media (max-width:960px){
+  section{padding:100px 6vw}
+  #hero{grid-template-columns:1fr;text-align:left}
+  .hk-tilt{width:82vw}
+  .meta{grid-template-columns:repeat(2,auto)}
+  .c-wide,.c-mid,.c-third{grid-column:span 12}
+  .two-col,.sym-grid,.evo,.studio{grid-template-columns:1fr}
+  .evo-sticky{top:70px;z-index:3}
+  .evo-canvas-wrap{max-width:420px;margin:0 auto}
+  .evo-steps .step{min-height:60vh}
+  .spec-grid,.effect-grid{grid-template-columns:1fr 1fr}
+  .timeline{grid-template-columns:repeat(3,1fr);row-gap:30px}
+  .timeline::before,.timeline .fill{display:none}
+  .use-grid{grid-template-columns:1fr}
+  .sidenav{display:none}
+  .guide-steps{grid-template-columns:1fr}
+  .chart{grid-template-columns:repeat(12,1fr)}
+  .scroll-cue{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+@media print{
+  .topbar,.sidenav,.progress,.scroll-cue,#studio .panel .btns{display:none!important}
+  body{background:#fff;color:#111}
+  section{min-height:auto;page-break-inside:avoid;padding:40px}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<header class="topbar" id="topbar">
+  <div class="brand"><span class="dot-o"></span><b>강릉시 자원순환센터</b> 손수건 기념품 디자인 보고</div>
+  <div class="top-actions">
+    <button class="pill" id="btnStudio">🎨 색상 시연</button>
+    <button class="pill" id="btnFull">⛶ 발표 모드</button>
+  </div>
+</header>
+
+<nav class="sidenav" id="sidenav"></nav>
+
+<!-- 01 표지 -->
+<section id="hero" data-title="표지">
+  <div class="hero-copy">
+    <div class="tag">● 기념품 디자인 결과 보고 · 2026. 11.</div>
+    <h1 class="hero-title">
+      <span class="ln"><span>버려진 것이</span></span>
+      <span class="ln"><span>다시 숲이 되는</span></span>
+      <span class="ln"><span>손수건 한 장</span></span>
+    </h1>
+    <p class="hero-sub">강릉시 자원순환센터 기념품 손수건의 디자인 의미와 색상 개발 과정을 보고드립니다.</p>
+    <div class="meta">
+      <div>납품처<b>강릉시 자원순환센터</b></div>
+      <div>품목<b>손수건 기념품</b></div>
+      <div>수량<b>300매</b></div>
+      <div>규격<b>45 × 45 cm</b></div>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="orbit"></div><div class="orbit two"></div>
+    <div class="hk-tilt" id="tilt"><img src="assets/handkerchief.jpg" alt="강릉시 자원순환센터 손수건 디자인 (오렌지안)"></div>
+  </div>
+  <div class="scroll-cue"><i></i>SCROLL</div>
+</section>
+
+<!-- 02 한눈에 보기 -->
+<section id="summary" data-title="한눈에 보기">
+  <div class="wrap">
+    <div class="eyebrow reveal">01 · 한눈에 보기</div>
+    <h2 class="reveal d1">결론부터 말씀드립니다.</h2>
+    <div class="sum-grid">
+      <div class="card verdict c-wide reveal">
+        <h4>최종 추천안</h4>
+        <div class="big"><span class="chip"></span>시안 3 · 오렌지</div>
+        <p>짙은 남색 바탕과 <b>보색 대비</b>를 이루어 멀리서도 눈에 띄고, 자원순환센터의 <b>‘에너지 회수’</b> 이미지를 가장 잘 전달함</p>
+      </div>
+      <div class="card c-mid reveal d1"><h4>디자인 콘셉트</h4><p style="font-family:var(--serif);font-size:24px;line-height:1.35">“순환의 고리,<br>다시 숲이 되다”</p></div>
+      <div class="card c-third reveal d1"><h4>납품 수량</h4><div class="num" data-count="300">0<small>매</small></div></div>
+      <div class="card c-third reveal d2"><h4>규격 · 소재</h4><div class="num" data-count="45">0<small>× 45cm</small></div><p style="margin-top:10px;color:var(--mute);font-size:14px">아사면 · 종이케이스 + 스티커 포장</p></div>
+      <div class="card c-third reveal d3"><h4>색상 시안</h4><div class="num" data-count="3">0<small>종</small></div><p style="margin-top:10px;color:var(--mute);font-size:14px">화이트 · 옐로 · 오렌지 비교 후 선정</p></div>
+      <div class="card c-wide reveal d2" style="grid-column:span 12">
+        <h4>보고 요지</h4>
+        <ul class="gae" style="margin-top:0">
+          <li>원형 그림은 <b>자원순환센터와 주변 자연</b>, 원형 테두리는 <b>버려지는 자원의 순환</b>, 사각 테두리는 <b>자연의 복구</b>를 상징함</li>
+          <li>일회용 휴지·물티슈를 대신하는 <b>다회용 손수건</b> 자체가 자원순환 메시지를 담은 기념품임</li>
+          <li>발표 현장에서 요청 색상을 즉시 적용해 볼 수 있는 <b>실시간 색상 시연 도구</b>를 함께 제공함 (07장)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 추진 배경 -->
+<section id="background" data-title="추진 배경">
+  <div class="wrap two-col">
+    <div>
+      <div class="eyebrow reveal">02 · 추진 배경 및 목적</div>
+      <h2 class="reveal d1">왜 <em>손수건</em>인가</h2>
+      <p class="lead reveal d2">강릉시 자원순환센터는 생활폐기물을 처리하고 그 과정에서 에너지를 회수하는 시설이며, 시민과 학생을 대상으로 견학 프로그램을 운영함. 견학의 기억을 일상으로 이어 줄 기념품으로 <b>다시 쓰는 물건</b>을 선택함.</p>
+      <ul class="gae reveal d3">
+        <li>추진 목적</li>
+        <li class="o">견학 방문객에게 자원순환의 의미를 오래 기억하게 하는 기념품 제작</li>
+        <li class="o">일회용품 대신 다회용품을 쓰는 생활 습관 제안</li>
+        <li>품목 선정 이유</li>
+        <li class="o">손수건, 도시락 보자기, 가방 스카프 등 <b>한 장으로 여러 용도</b>에 사용 가능</li>
+        <li class="d">쓸수록 센터의 메시지가 일상 속에서 반복 노출되는 ‘움직이는 홍보물’</li>
+      </ul>
+      <div class="keyword-row reveal d4">
+        <div class="kw"><b>#</b>자원순환</div><div class="kw"><b>#</b>1회용품 줄이기</div><div class="kw"><b>#</b>탄소중립 생활 실천</div><div class="kw"><b>#</b>폐기물 에너지</div>
+      </div>
+    </div>
+    <div class="flow">
+      <div class="flow-step reveal"><div class="ic">01</div><div><b>버려지는 자원</b><span>가정에서 배출되는 생활폐기물</span></div></div>
+      <div class="flow-step reveal d1"><div class="ic">02</div><div><b>자원순환센터</b><span>처리 과정에서 에너지 회수</span></div></div>
+      <div class="flow-step reveal d2"><div class="ic">03</div><div><b>자연의 회복</b><span>깨끗한 숲과 하늘, 새와 나무</span></div></div>
+      <div class="flow-step reveal d3"><div class="ic">04</div><div><b>시민의 실천</b><span>다회용 손수건으로 일상 속 순환 참여</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 콘셉트 -->
+<section id="concept" data-title="디자인 콘셉트">
+  <svg class="concept-ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="38" style="animation-direction:reverse;opacity:.5"/></svg>
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center">03 · 디자인 콘셉트</div>
+    <p class="concept-quote reveal d1">순환의 <span>고리</span>,<br>다시 <span>숲</span>이 되다</p>
+    <div class="concept-chain reveal d2">
+      <div>버려지는 자원</div><i>→</i><div>순환의 톱니</div><i>→</i><div>회복된 자연</div><i>→</i><div>Let’s save the Earth</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 상징 해설 -->
+<section id="symbol" data-title="상징 해설">
+  <div class="wrap">
+    <div class="eyebrow reveal">04 · 디자인 요소별 상징</div>
+    <h2 class="reveal d1">한 장의 손수건, <em>네 겹</em>의 이야기</h2>
+    <div class="sym-grid">
+      <div class="sym-stage reveal">
+        <img src="assets/handkerchief.jpg" alt="손수건 디자인 요소 해설">
+        <svg viewBox="0 0 926 926" aria-hidden="true">
+          <defs>
+            <mask id="m-center"><rect width="926" height="926" fill="#fff"/><circle cx="463" cy="466" r="240" fill="#000"/></mask>
+            <mask id="m-ring"><rect width="926" height="926" fill="#fff"/><circle cx="463" cy="466" r="352" fill="#000"/><circle cx="463" cy="466" r="236" fill="#fff"/></mask>
+            <mask id="m-frame"><rect width="926" height="926" fill="#fff"/><path d="M0 0H926V926H0Z M150 150V776H776V150Z" fill="#000" fill-rule="evenodd"/></mask>
+            <mask id="m-text"><rect width="926" height="926" fill="#fff"/><rect x="250" y="225" width="460" height="130" rx="40" fill="#000"/><rect x="270" y="840" width="390" height="50" rx="20" fill="#000"/><rect x="290" y="70" width="350" height="45" rx="20" fill="#000"/><rect x="40" y="280" width="70" height="370" rx="20" fill="#000"/><rect x="816" y="280" width="70" height="370" rx="20" fill="#000"/></mask>
+          </defs>
+          <rect class="shade" id="shade" width="926" height="926" mask="url(#m-center)"/>
+          <circle class="glow" data-k="center" cx="463" cy="466" r="240"/>
+          <g class="glow" data-k="ring"><circle cx="463" cy="466" r="352"/><circle cx="463" cy="466" r="236"/></g>
+          <path class="glow" data-k="frame" d="M150 150V776H776V150Z"/>
+          <g class="glow" data-k="text"><rect x="250" y="225" width="460" height="130" rx="40"/><rect x="270" y="840" width="390" height="50" rx="20"/></g>
+        </svg>
+      </div>
+      <div>
+        <div class="sym-tabs" id="symTabs">
+          <button class="sym-tab on" data-k="center"><span class="n">①</span><b>원형 · 자원순환센터와 환경</b>
+            <p>숲으로 둘러싸인 산자락 아래 자원순환센터를 그림. 굴뚝 위에 돋아난 <b>새싹</b>은 폐기물 처리 과정이 다시 생명으로 이어진다는 의미를 담음.</p></button>
+          <button class="sym-tab" data-k="ring"><span class="n">②</span><b>원형 테두리 · 버려지는 자원의 순환</b>
+            <p>병·캔·용기처럼 버려지는 자원의 형태를 <b>톱니바퀴</b>처럼 맞물리게 배치함. 자원이 멈추지 않고 돌고 도는 순환 구조를 시각화함.</p></button>
+          <button class="sym-tab" data-k="frame"><span class="n">③</span><b>사각 테두리 · 자연의 복구</b>
+            <p>네 모서리의 <b>나무</b>, 하늘을 나는 <b>파랑새</b>, 흩어진 <b>산소방울</b>로 자원순환센터의 목적인 자연 복구를 표현함.</p></button>
+          <button class="sym-tab" data-k="text"><span class="n">④</span><b>문구 · Let’s save the Earth</b>
+            <p>원형 상단의 <b>“Let’s save the Earth”</b>와 테두리의 <b>“Gangneung Resource Recovery Center”</b>로 메시지와 기관명을 함께 전달함. 손글씨 서체로 친근함을 더함.</p></button>
+        </div>
+        <p class="sym-hint">※ 항목을 누르면 해당 부분이 강조됩니다. 6초마다 자동으로 넘어갑니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 색상 개발 과정 -->
+<section id="evolution" data-title="색상 개발 과정">
+  <div class="wrap">
+    <div class="eyebrow reveal">05 · 색상 개발 과정</div>
+    <h2 class="reveal d1">흰색에서 <em>오렌지</em>까지</h2>
+    <p class="lead reveal d2">바탕(남색)·숲(초록)·하늘(청색)은 고정하고, 메시지의 중심인 <b>‘순환의 톱니’</b> 색만 바꾸어 세 가지 시안을 비교함. 스크롤하면 시안이 차례로 바뀝니다.</p>
+    <div class="evo">
+      <div class="evo-sticky">
+        <div class="evo-canvas-wrap" id="evoWrap">
+          <canvas id="evo0"></canvas><canvas id="evo1" style="opacity:0"></canvas><canvas id="evo2" style="opacity:0"></canvas>
+          <div class="evo-label"><i id="evoDot" style="background:var(--white)"></i><span id="evoName">시안 1 · White</span></div>
+        </div>
+        <div class="evo-bar" id="evoBar"><span></span><span></span><span></span></div>
+      </div>
+      <div class="evo-steps" id="evoSteps">
+        <div class="step on" data-i="0" style="--sc:var(--white)">
+          <div class="sw"><i style="background:#dfe8d2"></i><div><b>시안 1 · White</b><small>#DFE8D2</small></div></div>
+          <h3>차분하고 깨끗한 인상</h3>
+          <p>순환 고리를 연한 미색으로 표현해 그림 속 숲과 하늘이 가장 돋보이는 안.</p>
+          <div class="why">바탕과의 밝기 차이는 가장 크나, 실사용 시 <b>얼룩과 때가 잘 보이고</b> 기념품으로서의 인상이 다소 약함.</div>
+        </div>
+        <div class="step" data-i="1" style="--sc:var(--yellow)">
+          <div class="sw"><i style="background:#f9c25a"></i><div><b>시안 2 · Yellow</b><small>#F9C25A</small></div></div>
+          <h3>밝고 따뜻한 희망</h3>
+          <p>햇살 같은 노랑으로 친근함과 생동감을 더한 안.</p>
+          <div class="why">밝고 부드러우나 초록 숲과 색상 거리가 가까워 <b>순환 고리의 존재감이 흐려짐</b>.</div>
+        </div>
+        <div class="step" data-i="2" style="--sc:var(--orange)">
+          <div class="sw"><i style="background:#fd6b18"></i><div><b>시안 3 · Orange ★ 추천</b><small>#FD6B18</small></div></div>
+          <h3>에너지로 되살아나는 순환</h3>
+          <p>남색·청색 바탕과 정반대 위치의 색(보색)으로 순환 고리가 가장 강하게 살아나는 안.</p>
+          <div class="why">폐기물에서 <b>에너지를 회수</b>하는 센터의 역할을 따뜻한 불빛 색으로 상징하며, 멀리서도 한눈에 띄어 <b>홍보 효과가 가장 큼</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eval">
+      <div class="eyebrow reveal">시안 비교 평가</div>
+      <table class="ev reveal d1" id="evalTable">
+        <thead><tr><th>시안</th><th>명도 대비<br>(바탕 남색 기준)</th><th>색상 대비<br>(보색 정도)</th><th>오염 내구성</th><th>메시지 적합성</th><th>종합</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <p class="note">※ 명도 대비·색상 대비는 화면 색상값(HEX)으로 계산한 수치이며, 원단 인쇄 시 실제 색은 샘플로 최종 확인 예정. 오염 내구성·메시지 적합성은 디자이너 평가임.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 색상 시연 -->
+<section id="studio" data-title="실시간 색상 시연">
+  <div class="wrap">
+    <div class="eyebrow reveal">06 · 실시간 색상 시연</div>
+    <h2 class="reveal d1">원하시는 색, <em>지금 바로</em> 바꿔 드립니다</h2>
+    <p class="lead reveal d2">스포이드로 <b>바꿀 부분의 색</b>을 찍고, 색상표에서 <b>원하는 색</b>을 찍으면 손수건 전체에서 같은 색이 한 번에 바뀝니다. 그림자와 질감은 그대로 유지됩니다.</p>
+    <div class="guide-steps reveal d3">
+      <div><b>1</b>손수건 위에서 바꿀 색을 콕 찍기 (예: 오렌지 톱니)</div>
+      <div><b>2</b>오른쪽 색상표에서 원하는 색 찍기 → 즉시 변경</div>
+      <div><b>3</b>다른 색도 계속 눌러 비교 · 「원본 보기」를 누르고 있으면 원래 디자인</div>
+    </div>
+    <div class="studio">
+      <div class="canvas-box reveal" id="canvasBox">
+        <canvas id="studioCanvas" width="926" height="926"></canvas>
+        <div class="mode-banner" id="modeBanner"><i></i><span>① 바꿀 색을 손수건에서 찍어 주세요</span></div>
+        <div class="compare-badge" id="cmpBadge">원본</div>
+        <div class="loupe" id="loupe"><canvas id="loupeC" width="120" height="120"></canvas><span id="loupeHex">#000000</span></div>
+      </div>
+      <div class="panel reveal d1">
+        <div class="slots">
+          <button class="slot active" id="slotSrc"><small>① 바꿀 색 (스포이드)</small><div class="sw"><i id="srcSw"></i><code id="srcHex">— 찍어 주세요</code></div></button>
+          <span class="arrow">→</span>
+          <button class="slot" id="slotTgt"><small>② 바꿀 색상</small><div class="sw"><i id="tgtSw"></i><code id="tgtHex">— 선택 대기</code></div></button>
+        </div>
+
+        <h5>강릉 테마 · 기존 시안 <span></span></h5>
+        <div class="presets" id="presets"></div>
+
+        <h5>색상표 <span style="font-size:12px">칸에 마우스를 올리면 커집니다</span></h5>
+        <div class="chart" id="chart"></div>
+
+        <h5>세밀 조정</h5>
+        <div class="row"><label style="min-width:84px">색 인식 범위</label><input type="range" id="tol" min="20" max="180" value="95"><code id="tolV" style="font-size:13px;width:32px">95</code></div>
+        <div class="btns">
+          <button class="btn native">🎯 직접 색 고르기<input type="color" id="nativeColor" value="#fd6b18"></button>
+          <button class="btn" id="btnEye" title="화면 어디서든 색을 찍습니다 (크롬·엣지)">💧 화면 스포이드</button>
+        </div>
+
+        <h5>변경 기록 <span></span></h5>
+        <div class="history" id="history"><span style="color:var(--mute)">아직 변경 없음</span></div>
+
+        <div class="btns">
+          <button class="btn" id="btnUndo">↶ 되돌리기</button>
+          <button class="btn" id="btnCompare">◐ 원본 보기 (누르고 있기)</button>
+          <button class="btn" id="btnReset">⟲ 처음으로</button>
+          <button class="btn primary" id="btnSave">⬇ 이미지 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 사양·공정 -->
+<section id="spec" data-title="제작 사양·공정">
+  <div class="wrap">
+    <div class="eyebrow reveal">07 · 제작 사양 및 공정</div>
+    <h2 class="reveal d1">300장 모두, <em>같은 품질</em>로</h2>
+    <div class="spec-grid">
+      <div class="spec reveal"><h4>규격</h4><div class="num" data-count="45">0<small>cm</small></div><p>가로·세로 45cm 정사각</p></div>
+      <div class="spec reveal d1"><h4>수량</h4><div class="num" data-count="300">0<small>매</small></div><p>전량 개별 포장 납품</p></div>
+      <div class="spec reveal d2"><h4>소재</h4><div class="num" style="font-size:40px">아사면</div><p>얇고 부드러워 흡수와 건조가 빠름</p></div>
+      <div class="spec reveal d3"><h4>포장</h4><div class="num" style="font-size:40px">종이케이스</div><p>+ 기관 스티커 부착</p></div>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="fill"></div>
+      <div class="tl" data-n="1"><b>기획·조사</b><span>센터 역할·메시지 분석</span></div>
+      <div class="tl" data-n="2"><b>디자인 시안</b><span>요소 구성·3색 시안</span></div>
+      <div class="tl" data-n="3"><b>색상 확정</b><span>보고·의견 반영</span></div>
+      <div class="tl" data-n="4"><b>샘플 제작</b><span>원단 색상·인쇄 검수</span></div>
+      <div class="tl" data-n="5"><b>본생산</b><span>300매 인쇄·봉제</span></div>
+      <div class="tl" data-n="6"><b>포장·납품</b><span>전수 검사 후 납품</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 포장 -->
+<section id="package" data-title="포장">
+  <div class="wrap two-col" style="align-items:center">
+    <div class="pkg-scene reveal">
+      <div class="box">
+        <div class="face f-top"><div class="window"><img src="assets/handkerchief.jpg" alt=""></div><div class="sticker">GANGNEUNG<br>Resource<br>Recovery<br>Center</div></div>
+        <div class="face f-bot"></div>
+        <div class="face f-side f-front">LET’S SAVE THE EARTH</div>
+        <div class="face f-side f-back">강릉시 자원순환센터</div>
+        <div class="face f-side f-left">45 × 45 cm</div>
+        <div class="face f-side f-right">RECYCLED PAPER</div>
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow reveal">08 · 포장 콘셉트</div>
+      <h2 class="reveal d1">포장까지 <em>순환</em>의 언어로</h2>
+      <ul class="gae reveal d2">
+        <li>종이케이스 사용으로 비닐 포장 최소화</li>
+        <li>원형 창으로 손수건의 순환 고리 디자인이 보이도록 구성</li>
+        <li>오렌지 원형 스티커로 기관명을 표시하고 손수건 색과 통일감 부여</li>
+        <li class="d">위 입체 이미지는 포장 콘셉트 예시이며, 실제 포장 디자인은 샘플 단계에서 확정 예정</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 활용 -->
+<section id="use" data-title="활용 장면">
+  <div class="wrap">
+    <div class="eyebrow reveal">09 · 활용 장면</div>
+    <h2 class="reveal d1">한 장으로, <em>세 가지</em> 쓰임</h2>
+    <div class="use-grid">
+      <figure class="use reveal"><img src="assets/use-hand.jpg" alt="손수건으로 사용하는 모습"><figcaption><b>손수건</b><span>휴지·물티슈 대신 매일 쓰는 다회용 손수건</span></figcaption></figure>
+      <figure class="use reveal d1"><img src="assets/use-lunchbox.jpg" alt="도시락 보자기로 사용하는 모습"><figcaption><b>도시락 보자기</b><span>일회용 비닐봉투 대신 감싸는 보자기</span></figcaption></figure>
+      <figure class="use reveal d2"><img src="assets/use-bag.jpg" alt="가방 스카프로 사용하는 모습"><figcaption><b>가방 스카프</b><span>에코백에 묶어 메시지를 드러내는 액세서리</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 11 기대효과 -->
+<section id="effect" data-title="기대 효과">
+  <div class="wrap">
+    <div class="eyebrow reveal">10 · 기대 효과</div>
+    <h2 class="reveal d1">기념품이 끝이 아니라 <em>시작</em>이 되도록</h2>
+    <div class="effect-grid">
+      <div class="effect reveal"><div class="ic">♻</div><b>자원순환 인식 확산</b><p>견학에서 들은 내용을 손수건 그림으로 다시 떠올리게 함</p></div>
+      <div class="effect reveal d1"><div class="ic">⊘</div><b>1회용품 사용 감소</b><p>휴지·물티슈·비닐봉투를 대신하는 생활 속 실천 도구</p></div>
+      <div class="effect reveal d2"><div class="ic">◎</div><b>지속적인 기관 홍보</b><p>쓸 때마다 기관명과 메시지가 노출되는 움직이는 홍보물</p></div>
+      <div class="effect reveal d3"><div class="ic">✦</div><b>친근한 기관 이미지</b><p>‘소각시설’의 딱딱한 인상을 숲과 새가 있는 따뜻한 이미지로 전환</p></div>
+    </div>
+    <div class="policy reveal d2">
+      <div class="tagx">정책 연계</div>
+      <div>자원순환 사회 전환 · 1회용품 줄이기 · 탄소중립 생활 실천 등 환경 정책의 방향과 맞닿은 <b>‘다시 쓰는 기념품’</b>으로, 기관 기념품의 모범 사례로 활용 가능함.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="end">감사합니다</p>
+  <p>디자인 · 제작 &nbsp;|&nbsp; 아트배너디자인 김영래 작가</p>
+  <p style="margin-top:6px;font-size:12px">All copyright reserved © artbannerdesign</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/handkerchief-data.js"></script>
+<script>
+(()=>{
+/* ================= 기본 색 정보 ================= */
+const NAVY='#17242c';
+const BASE_ORANGE='#fd6b18';
+const VARIANTS=[{n:'시안 1 · White',c:'#dfe8d2'},{n:'시안 2 · Yellow',c:'#f9c25a'},{n:'시안 3 · Orange',c:'#fd6b18'}];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const hex2rgb=h=>{h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]};
+const rgb2hex=(r,g,b)=>'#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('').toUpperCase();
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('show'),2200)}
+
+/* ================= 색 바꾸기 엔진 =================
+   기준색과 비슷한 픽셀만 골라, (목표색 - 기준색) 만큼 이동시킴
+   → 원단 질감·그림자(밝기 차이)가 그대로 유지됨 */
+function recolor(srcData,out,from,to,tol){
+  const s=srcData.data,o=out.data,[fr,fg,fb]=from,[tr,tg,tb]=to;
+  const dr=tr-fr,dg=tg-fg,db=tb-fb,inner=tol*.55,span=tol-inner;
+  for(let i=0;i<s.length;i+=4){
+    const r=s[i],g=s[i+1],b=s[i+2];
+    const rm=(r+fr)/2, x=r-fr,y=g-fg,z=b-fb;
+    const d=Math.sqrt((2+rm/256)*x*x+4*y*y+(2+(255-rm)/256)*z*z)/3;
+    let w=d<=inner?1:d>=tol?0:1-(d-inner)/span;
+    if(w>0){o[i]=r+dr*w;o[i+1]=g+dg*w;o[i+2]=b+db*w}else{o[i]=r;o[i+1]=g;o[i+2]=b}
+    o[i+3]=s[i+3];
+  }
+  return out;
+}
+
+/* ================= 이미지 로드 ================= */
+const img=new Image();
+img.onload=init;
+img.src=window.HK_SRC||'assets/handkerchief.jpg';
+let W,H,original;
+
+function init(){
+  W=img.naturalWidth;H=img.naturalHeight;
+  const c=document.createElement('canvas');c.width=W;c.height=H;
+  const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(img,0,0);
+  try{original=x.getImageData(0,0,W,H)}catch(e){console.warn('canvas 읽기 실패',e);return}
+  buildEvolution();buildStudio();
+}
+
+/* ================= 06 색상 개발 과정 ================= */
+function buildEvolution(){
+  VARIANTS.forEach((v,i)=>{
+    const cv=$('#evo'+i);cv.width=W;cv.height=H;const x=cv.getContext('2d');
+    if(v.c===BASE_ORANGE){x.putImageData(original,0,0)}
+    else{const out=x.createImageData(W,H);recolor(original,out,hex2rgb(BASE_ORANGE),hex2rgb(v.c),95);x.putImageData(out,0,0)}
+  });
+  const steps=$$('#evoSteps .step'),bars=$$('#evoBar span');
+  const show=i=>{
+    steps.forEach((s,k)=>s.classList.toggle('on',k===i));
+    VARIANTS.forEach((v,k)=>$('#evo'+k).style.opacity=k<=i?1:0);
+    bars.forEach((b,k)=>b.style.background=k<=i?VARIANTS[k].c:'');
+    $('#evoName').textContent=VARIANTS[i].n;$('#evoDot').style.background=VARIANTS[i].c;
+  };
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)show(+e.target.dataset.i)}),{rootMargin:'-45% 0px -45% 0px'});
+  steps.forEach(s=>io.observe(s));show(0);
+  buildEval();
+}
+
+/* 평가표: 명도대비(WCAG 대비비) + 색상차(색상환 각도) 계산 */
+function lum([r,g,b]){const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)};return .2126*f(r)+.7152*f(g)+.0722*f(b)}
+function contrast(a,b){const A=lum(hex2rgb(a)),B=lum(hex2rgb(b));return(Math.max(A,B)+.05)/(Math.min(A,B)+.05)}
+function hue(h){let[r,g,b]=hex2rgb(h).map(v=>v/255);const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;if(!d)return null;let hh=mx===r?((g-b)/d)%6:mx===g?(b-r)/d+2:(r-g)/d+4;hh*=60;return hh<0?hh+360:hh}
+function satur(h){const v=hex2rgb(h).map(x=>x/255),mx=Math.max(...v),mn=Math.min(...v);return mx?(mx-mn)/mx:0}
+function buildEval(){
+  const bgH=hue('#2b4d72'); // 하늘·바탕 청색 계열
+  const rows=VARIANTS.map((v,i)=>{
+    const cr=contrast(v.c,NAVY);
+    let hd=Math.abs(hue(v.c)-bgH);if(hd>180)hd=360-hd;
+    const comp=hd/180*satur(v.c); // 보색 정도 × 채도 (0~1)
+    const soil=['△ 낮음','○ 보통','◎ 높음'][i];
+    const msg=['○ 보통','○ 보통','◎ 매우 적합'][i];
+    return{v,cr,comp,soil,msg,i};
+  });
+  const maxCr=Math.max(...rows.map(r=>r.cr));
+  $('#evalTable tbody').innerHTML=rows.map(r=>`<tr class="${r.i===2?'pick':''}">
+    <td><span class="c" style="background:${r.v.c}"></span>${r.v.n}</td>
+    <td><span class="meter"><b data-w="${r.cr/maxCr*100}" style="background:${r.v.c}"></b></span>${r.cr.toFixed(1)} : 1</td>
+    <td><span class="meter"><b data-w="${r.comp*100}" style="background:${r.v.c}"></b></span>${Math.round(r.comp*100)}점</td>
+    <td>${r.soil}</td><td>${r.msg}</td><td>${r.i===2?'★ 추천':r.i===1?'차선':'보류'}</td></tr>`).join('');
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){$$('#evalTable .meter b').forEach(b=>b.style.width=b.dataset.w+'%');io.disconnect()}}),{threshold:.3});
+  io.observe($('#evalTable'));
+}
+
+/* ================= 07 실시간 색상 시연 ================= */
+let ctx,base,current,history=[],src=null,tgt=null,mode='src',log=[];
+function buildStudio(){
+  const cv=$('#studioCanvas');cv.width=W;cv.height=H;ctx=cv.getContext('2d',{willReadFrequently:true});
+  base=clone(original);current=clone(original);ctx.putImageData(current,0,0);
+  // 프리셋
+  const P=[['시안1 화이트','#dfe8d2'],['시안2 옐로','#f9c25a'],['시안3 오렌지','#fd6b18'],['경포 바다','#1f7fb6'],['대관령 소나무','#2f6b3a'],['정동진 일출','#ff8a3d'],['강릉 커피','#7a5236'],['단오 홍색','#c8102e'],['초당 순두부','#f3efe2']];
+  $('#presets').innerHTML=P.map(([n,c])=>`<button data-c="${c}"><i style="background:${c}"></i>${n}</button>`).join('');
+  // 색상표 12색상 × 6단계 + 무채색
+  const cells=[];
+  for(let row=0;row<6;row++){
+    for(let h=0;h<12;h++){
+      const L=[82,70,58,47,36,26][row],S=[70,85,95,90,80,70][row];
+      cells.push(hslHex(h*30+(h>=1&&h<=2?-5:0),S,L));
+    }
+  }
+  for(let k=0;k<12;k++){const v=Math.round(255-k*(235/11));cells.push(rgb2hex(v,v,v))}
+  $('#chart').innerHTML=cells.map(c=>`<button data-c="${c}" style="background:${c}" title="${c}"></button>`).join('');
+  $$('#presets button,#chart button').forEach(b=>b.addEventListener('click',()=>pickTarget(b.dataset.c)));
+  $('#nativeColor').addEventListener('input',e=>pickTarget(e.target.value.toUpperCase()));
+  $('#tol').addEventListener('input',e=>{$('#tolV').textContent=e.target.value;if(src&&tgt)apply(false)});
+  $('#slotSrc').onclick=()=>setMode('src');
+  $('#slotTgt').onclick=()=>{if(!src){toast('먼저 손수건에서 바꿀 색을 찍어 주세요');return}setMode('tgt')};
+  // 캔버스 스포이드 + 돋보기
+  const box=$('#canvasBox'),loupe=$('#loupe'),lc=$('#loupeC').getContext('2d');lc.imageSmoothingEnabled=false;
+  const pos=e=>{const r=cv.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:Math.floor((p.clientX-r.left)/r.width*W),y:Math.floor((p.clientY-r.top)/r.height*H),cx:p.clientX-r.left,cy:p.clientY-r.top}};
+  const px=(x,y)=>{const i=(Math.max(0,Math.min(H-1,y))*W+Math.max(0,Math.min(W-1,x)))*4,d=current.data;return[d[i],d[i+1],d[i+2]]};
+  const sample=(x,y)=>{let r=0,g=0,b=0,n=0;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){const p=px(x+dx,y+dy);r+=p[0];g+=p[1];b+=p[2];n++}return rgb2hex(r/n,g/n,b/n)};
+  const move=e=>{const p=pos(e);loupe.style.display='flex';loupe.style.left=(p.cx-65)+'px';loupe.style.top=(p.cy-170)+'px';
+    lc.clearRect(0,0,120,120);lc.drawImage(cv,p.x-7,p.y-7,15,15,0,0,120,120);lc.strokeStyle='#fff';lc.lineWidth=2;lc.strokeRect(52,52,16,16);
+    $('#loupeHex').textContent=sample(p.x,p.y)};
+  cv.addEventListener('pointermove',move);
+  cv.addEventListener('pointerleave',()=>loupe.style.display='none');
+  cv.addEventListener('click',e=>{const p=pos(e),c=sample(p.x,p.y);
+    if(mode==='src'){pickSource(c)}else{pickTarget(c)}});
+  // 버튼
+  $('#btnUndo').onclick=undo;$('#btnReset').onclick=reset;$('#btnSave').onclick=save;
+  const cmpOn=()=>{ctx.putImageData(original,0,0);$('#cmpBadge').style.display='block'},cmpOff=()=>{ctx.putImageData(current,0,0);$('#cmpBadge').style.display='none'};
+  const bc=$('#btnCompare');['pointerdown'].forEach(t=>bc.addEventListener(t,cmpOn));['pointerup','pointerleave','pointercancel'].forEach(t=>bc.addEventListener(t,cmpOff));
+  $('#btnEye').onclick=async()=>{
+    if(!('EyeDropper' in window)){toast('이 브라우저는 화면 스포이드를 지원하지 않습니다 (크롬·엣지 권장)');return}
+    try{const r=await new EyeDropper().open();const c=r.sRGBHex.toUpperCase().slice(0,7);mode==='src'?pickSource(c):pickTarget(c)}catch(e){}
+  };
+}
+function clone(d){return new ImageData(new Uint8ClampedArray(d.data),d.width,d.height)}
+function hslHex(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return rgb2hex(f(0)*255,f(8)*255,f(4)*255)}
+function setMode(m){mode=m;$('#slotSrc').classList.toggle('active',m==='src');$('#slotTgt').classList.toggle('active',m==='tgt');
+  $('#modeBanner span').textContent=m==='src'?'① 바꿀 색을 손수건에서 찍어 주세요':'② 색상표에서 원하는 색을 찍어 주세요'}
+function pickSource(c){
+  base=clone(current);src=c;tgt=null;
+  $('#srcSw').style.background=c;$('#srcHex').textContent=c;$('#tgtSw').style.background='';$('#tgtHex').textContent='— 선택 대기';
+  setMode('tgt');toast(`바꿀 색 ${c} 선택 완료 → 이제 원하는 색을 찍어 주세요`);
+}
+function pickTarget(c){c=c.toUpperCase();
+  if(!src){toast('먼저 손수건에서 바꿀 색을 찍어 주세요');setMode('src');return}
+  tgt=c;$('#tgtSw').style.background=c;$('#tgtHex').textContent=c;apply(true);
+}
+function apply(record){
+  // 항상 '이번 선택 직전 상태(base)'에서 다시 계산 → 여러 번 바꿔도 화질 저하 없음
+  if(record){history.push(clone(current))}
+  current=recolor(base,ctx.createImageData(W,H),hex2rgb(src),hex2rgb(tgt),+$('#tol').value);
+  ctx.putImageData(current,0,0);
+  if(record){log.push([src,tgt]);renderLog()}
+  document.documentElement.style.setProperty('--accent',accentFor(tgt));
+}
+function accentFor(c){const[r,g,b]=hex2rgb(c);const l=lum([r,g,b]);return l<.06?'#fd6b18':c}
+function renderLog(){$('#history').innerHTML=log.length?log.slice(-8).map(([a,b],i)=>`<span><i style="background:${a}"></i>→<i style="background:${b}"></i></span>`).join(''):'<span style="color:var(--mute)">아직 변경 없음</span>'}
+function undo(){if(!history.length){toast('되돌릴 단계가 없습니다');return}current=history.pop();base=clone(current);ctx.putImageData(current,0,0);log.pop();renderLog();
+  if(src&&log.length){src=log[log.length-1][1];$('#srcSw').style.background=src;$('#srcHex').textContent=src}toast('한 단계 되돌렸습니다')}
+function reset(){current=clone(original);base=clone(original);history=[];log=[];src=null;tgt=null;ctx.putImageData(current,0,0);renderLog();
+  $('#srcSw').style.background='';$('#srcHex').textContent='— 찍어 주세요';$('#tgtSw').style.background='';$('#tgtHex').textContent='— 선택 대기';
+  setMode('src');document.documentElement.style.setProperty('--accent','#fd6b18');toast('처음 디자인으로 돌아왔습니다')}
+function save(){
+  const a=document.createElement('a');a.download=`강릉_손수건_색상시안_${tgt?tgt.slice(1):'원본'}.png`;
+  a.href=$('#studioCanvas').toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();
+  toast('이미지를 저장했습니다 (미리보기 화면에서는 저장이 막힐 수 있습니다)');
+}
+
+/* ================= 공통 인터랙션 ================= */
+// 등장 애니메이션
+const rio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target)}}),{threshold:.15});
+$$('.reveal').forEach(el=>rio.observe(el));
+const tio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.4});tio.observe($('#timeline'));
+// 숫자 카운트업
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,to=+el.dataset.count,sm=el.querySelector('small').outerHTML,t0=performance.now();
+  const step=t=>{const p=Math.min(1,(t-t0)/1400),v=Math.round(to*(1-Math.pow(1-p,3)));el.innerHTML=v+sm;if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step);cio.unobserve(el)}),{threshold:.6});
+$$('[data-count]').forEach(el=>cio.observe(el));
+// 사이드 내비 + 진행바
+const secs=$$('section[data-title]');
+$('#sidenav').innerHTML=secs.map(s=>`<a href="#${s.id}" data-id="${s.id}"><span>${s.dataset.title}</span><i></i></a>`).join('');
+const nio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$('#sidenav a').forEach(a=>a.classList.toggle('on',a.dataset.id===e.target.id))}),{rootMargin:'-50% 0px -50% 0px'});
+secs.forEach(s=>nio.observe(s));
+addEventListener('scroll',()=>{const h=document.documentElement;$('#progress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';$('#topbar').classList.toggle('solid',h.scrollTop>40)},{passive:true});
+// 키보드로 섹션 이동 (발표용)
+addEventListener('keydown',e=>{
+  if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;
+  const keysNext=['ArrowRight','PageDown'],keysPrev=['ArrowLeft','PageUp'];
+  if(![...keysNext,...keysPrev].includes(e.key))return;e.preventDefault();
+  const y=scrollY+innerHeight*.3;let idx=secs.findIndex(s=>s.offsetTop>y)-1;if(idx<-1)idx=secs.length-1;
+  const cur=idx<0?secs.length-1:idx;const next=keysNext.includes(e.key)?Math.min(secs.length-1,cur+1):Math.max(0,cur-1);
+  secs[next].scrollIntoView({behavior:'smooth'});
+});
+// 발표 모드
+$('#btnFull').onclick=async()=>{try{document.fullscreenElement?await document.exitFullscreen():await document.documentElement.requestFullscreen()}catch(e){toast('이 화면에서는 전체화면이 지원되지 않습니다')}};
+$('#btnStudio').onclick=()=>$('#studio').scrollIntoView({behavior:'smooth'});
+// 히어로 3D 틸트
+const tilt=$('#tilt');
+$('#hero').addEventListener('pointermove',e=>{const r=tilt.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;tilt.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg)`});
+$('#hero').addEventListener('pointerleave',()=>tilt.style.transform='');
+// 상징 해설 탭
+const tabs=$$('.sym-tab'),keys=['center','ring','frame','text'];let symI=0,symTimer;
+function setSym(i){symI=i;const k=keys[i];tabs.forEach((t,j)=>{t.classList.toggle('on',j===i);if(j===i){t.classList.remove('on');void t.offsetWidth;t.classList.add('on')}});
+  $('#shade').setAttribute('mask',`url(#m-${k})`);$$('.sym-stage .glow').forEach(g=>g.style.opacity=g.dataset.k===k?1:0)}
+tabs.forEach((t,i)=>t.addEventListener('click',()=>{setSym(i);restart()}));
+function restart(){clearInterval(symTimer);symTimer=setInterval(()=>setSym((symI+1)%4),6000)}
+setSym(0);restart();
+})();
+</script>
+</body>
+</html>
